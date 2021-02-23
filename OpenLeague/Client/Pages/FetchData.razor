@@ -1,5 +1,4 @@
 ﻿@page "/fetchdata"
-@using OpenLeague.Shared
 @inject HttpClient Http
 
 <h1>Weather forecast</h1>
@@ -40,7 +39,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("api/WeatherForecast");
     }
 
 }

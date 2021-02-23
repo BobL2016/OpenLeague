@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLeague.Server", "OpenLeague\Server\OpenLeague.Server.csproj", "{B6F3DC44-AAFF-4D9B-AFE9-544D89DC5569}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenLeague.Server", "OpenLeague\Server\OpenLeague.Server.csproj", "{B6F3DC44-AAFF-4D9B-AFE9-544D89DC5569}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLeague.Client", "OpenLeague\Client\OpenLeague.Client.csproj", "{EF9A7CEF-0C03-41F2-B483-DD5E437AC9D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenLeague.Client", "OpenLeague\Client\OpenLeague.Client.csproj", "{EF9A7CEF-0C03-41F2-B483-DD5E437AC9D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLeague.Shared", "OpenLeague\Shared\OpenLeague.Shared.csproj", "{8517CDFF-62AD-421F-9060-3A8BD9B1DC43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenLeague.Shared", "OpenLeague\Shared\OpenLeague.Shared.csproj", "{8517CDFF-62AD-421F-9060-3A8BD9B1DC43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

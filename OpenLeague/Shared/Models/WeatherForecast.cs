@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace OpenLeague.Shared
+namespace OpenLeague.Shared.Models
 {
     public class WeatherForecast
     {
