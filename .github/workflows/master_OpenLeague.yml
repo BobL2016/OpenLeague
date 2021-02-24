@@ -28,9 +28,7 @@ jobs:
       run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
     - name: Install EF Core tools
-      run: |
-        dotnet tool install --global dotnet-ef
-        dotnet tool restore
+      run: dotnet tool install --global dotnet-ef
 
     - name: Install EF Core tools
       run: dotnet ef database update
