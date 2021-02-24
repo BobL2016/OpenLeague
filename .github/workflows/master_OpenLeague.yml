@@ -27,11 +27,11 @@ jobs:
     - name: dotnet publish
       run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
-    - name: Install EF Core tools
-      run: dotnet tool install --global dotnet-ef
+#    - name: Install EF Core tools
+#      run: dotnet tool install --global dotnet-ef
 
-    - name: Install EF Core tools
-      run: dotnet ef database update --project OpenLeague/OpenLeague/Server/OpenLeague.Server.csproj
+#    - name: Install EF Core tools
+#      run: dotnet ef database update --project OpenLeague/OpenLeague/Server/OpenLeague.Server.csproj
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
