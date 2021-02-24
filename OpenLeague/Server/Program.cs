@@ -17,7 +17,7 @@ namespace OpenLeague.Server
         {
             var host = CreateHostBuilder(args).Build();
 
-            CreateDbIfNotExists(host);
+            //CreateDbIfNotExists(host);
 
             host.Run();
         }
@@ -30,7 +30,6 @@ namespace OpenLeague.Server
                 try
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
-                    //context.Database.EnsureCreated();
                     DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)

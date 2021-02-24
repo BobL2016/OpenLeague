@@ -16,23 +16,27 @@ namespace OpenLeague.Server.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public MembersController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        //public MembersController(ApplicationDbContext context)
+        //{
+        //    _context = context;
+        //}
 
         // GET: api/Members
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Member>>> GetMembers()
         {
-            return await _context.Members.ToListAsync();
+            return Seeds.Members.ToList<Member>();
+
+            //return await _context.Members.ToListAsync();
         }
 
         // GET: api/Members/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Member>> GetMember(int id)
         {
-            var member = await _context.Members.FindAsync(id);
+
+            var member = Seeds.Members.Where(member => member.ID == id).First<Member>();
+            //var member = await _context.Members.FindAsync(id);
 
             if (member == null)
             {
@@ -84,25 +88,27 @@ namespace OpenLeague.Server.Controllers
         //    return CreatedAtAction("GetMember", new { id = member.ID }, member);
         //}
 
-        // DELETE: api/Members/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMember(int id)
-        {
-            var member = await _context.Members.FindAsync(id);
-            if (member == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/Members/5
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteMember(int id)
+        //{
+        //    var member = await _context.Members.FindAsync(id);
+        //    if (member == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _context.Members.Remove(member);
-            await _context.SaveChangesAsync();
+        //    _context.Members.Remove(member);
+        //    await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         private bool MemberExists(int id)
         {
-            return _context.Members.Any(e => e.ID == id);
+
+            return Seeds.Members.Any(e => e.ID == id);
+            //return _context.Members.Any(e => e.ID == id);
         }
     }
 }
