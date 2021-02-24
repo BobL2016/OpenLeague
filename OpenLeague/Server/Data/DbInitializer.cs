@@ -17,16 +17,9 @@ namespace OpenLeague.Server.Data
                 return;
             }
 
-            var members = new Member[]
-            {
-                new Member { FirstName = "John", LastName = "Doe", GHIN = "2148925", HandicapIndex = 2.5M },
-                new Member { FirstName = "Jane", LastName = "Doe", GHIN = "8624764", HandicapIndex = 21.9M },
-                new Member { FirstName = "John", LastName = "Smith", GHIN = "2148925", HandicapIndex = 16.2M },
-                new Member { FirstName = "Jane", LastName = "Smith", GHIN = "6515897", HandicapIndex = 1.4M },
-            };
-
-            context.Members.AddRange(members);
+            context.Members.AddRange(Seeds.Members);
             context.SaveChanges();
         }
+
     }
 }
