@@ -1,27 +1,108 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using OpenLeague.Server.Data;
 using OpenLeague.Shared.Models;
 
 namespace OpenLeague.Server.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class MembersController : Controller
+    [ApiController]
+    public class MembersController : ControllerBase
     {
-        [HttpGet]
-        public IEnumerable<Member> Get()
+        private readonly ApplicationDbContext _context;
+
+        public MembersController(ApplicationDbContext context)
         {
-            List<Member> members = new List<Member>();
+            _context = context;
+        }
 
-            members.Add(new Member { ID = 1, FirstName = "John", LastName = "Doe", GHIN = "0000000", HandicapIndex = 10.3M});
-            members.Add(new Member { ID = 2, FirstName = "Jane", LastName = "Doe", GHIN = "1111111", HandicapIndex = 4.8M });
-            members.Add(new Member { ID = 3, FirstName = "John", LastName = "Smith", GHIN = "2222222", HandicapIndex = 2.5M });
-            members.Add(new Member { ID = 4, FirstName = "Jane", LastName = "Smith", GHIN = "3333333", HandicapIndex = 19.1M });
+        // GET: api/Members
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Member>>> GetMembers()
+        {
+            return await _context.Members.ToListAsync();
+        }
 
-            return members;
+        // GET: api/Members/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Member>> GetMember(int id)
+        {
+            var member = await _context.Members.FindAsync(id);
+
+            if (member == null)
+            {
+                return NotFound();
+            }
+
+            return member;
+        }
+
+        //// PUT: api/Members/5
+        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutMember(int id, Member member)
+        //{
+        //    if (id != member.ID)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    _context.Entry(member).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!MemberExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return NoContent();
+        //}
+
+        //// POST: api/Members
+        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPost]
+        //public async Task<ActionResult<Member>> PostMember(Member member)
+        //{
+        //    _context.Members.Add(member);
+        //    await _context.SaveChangesAsync();
+
+        //    return CreatedAtAction("GetMember", new { id = member.ID }, member);
+        //}
+
+        // DELETE: api/Members/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteMember(int id)
+        {
+            var member = await _context.Members.FindAsync(id);
+            if (member == null)
+            {
+                return NotFound();
+            }
+
+            _context.Members.Remove(member);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool MemberExists(int id)
+        {
+            return _context.Members.Any(e => e.ID == id);
         }
     }
 }
