@@ -13,5 +13,6 @@ namespace OpenLeague.Server.Data
         { }
 
         public DbSet<Member> Members { get; set; }
+        public DbSet<ScheduleItem> ScheduleItems { get; set; }
     }
 }

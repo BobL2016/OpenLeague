@@ -1,0 +1,42 @@
+﻿@page "/scheduleitems"
+
+<h1>Schedule</h1>
+
+@if (scheduleItems == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Date</td>
+                <td>Title</td>
+                <td>Format</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var scheduleItem in scheduleItems)
+            {
+                <tr>
+                    <td>@scheduleItem.Date</td>
+                    <td>@scheduleItem.Title</td>
+                    <td>@scheduleItem.Format</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@inject HttpClient Http;
+
+@code {
+    ScheduleItem[] scheduleItems;
+
+    protected override async Task OnInitializedAsync()
+    {
+        scheduleItems = await Http.GetFromJsonAsync<ScheduleItem[]>("api/ScheduleItems");
+    }
+}
+

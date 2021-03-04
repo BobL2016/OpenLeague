@@ -19,6 +19,9 @@ namespace OpenLeague.Server.Data
 
             context.Members.AddRange(Seeds.Members);
             context.SaveChanges();
+
+            context.ScheduleItems.AddRange(Seeds.ScheduleItems);
+            context.SaveChanges();
         }
 
     }

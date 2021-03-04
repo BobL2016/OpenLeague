@@ -24,5 +24,21 @@ namespace OpenLeague.Server.Data
                 return members;
             }
         }
+
+        public static ScheduleItem[] ScheduleItems
+        {
+            get
+            {
+                var scheduleItems = new ScheduleItem[]
+                {
+                    new ScheduleItem { ID = 1, Date = DateTime.Parse("4/4/2021 7:30 AM"), Title = "Opening Day", Format = "Two Man Best Ball" },
+                    new ScheduleItem { ID = 2, Date = DateTime.Parse("4/11/2021 7:45 AM"), Title = "League Play", Format = "Two Man Best Ball" },
+                    new ScheduleItem { ID = 3, Date = DateTime.Parse("4/18/2021 8:00 AM"), Title = "League Play", Format = "Two Man Best Ball" },
+                    new ScheduleItem { ID = 4, Date = DateTime.Parse("4/25/2021 8:15 AM"), Title = "Tourney", Format = "Four Man Scramble" }
+                };
+
+                return scheduleItems;
+            }
+        }
     }
 }
