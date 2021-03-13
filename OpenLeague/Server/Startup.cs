@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using OpenLeague.Server.Data;
+using OpenLeague.Server.Services;
 
 namespace OpenLeague.Server
 {
@@ -28,6 +29,7 @@ namespace OpenLeague.Server
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSwaggerGen();
+            services.AddTransient<IMemberService, MemberServiceMock>();
         //    services.AddDbContext<ApplicationDbContext>(options =>
         //        options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
         //    services.AddDatabaseDeveloperPageExceptionFilter();
