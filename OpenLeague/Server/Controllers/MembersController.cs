@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OpenLeague.Server.Data;
 using OpenLeague.Shared.Models;
+using OpenLeague.Server.Services;
 
 namespace OpenLeague.Server.Controllers
 {
@@ -14,19 +15,18 @@ namespace OpenLeague.Server.Controllers
     [ApiController]
     public class MembersController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IMemberService _memberService;
 
-        //public MembersController(ApplicationDbContext context)
-        //{
-        //    _context = context;
-        //}
+        public MembersController(IMemberService memberService)
+        {
+            _memberService = memberService;
+        }
 
         // GET: api/Members
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Member>>> GetMembers()
         {
-            return Seeds.Members.ToList<Member>();
-
+            return new ObjectResult(await _memberService.GetAllAsync());
             //return await _context.Members.ToListAsync();
         }
 
@@ -35,15 +35,14 @@ namespace OpenLeague.Server.Controllers
         public async Task<ActionResult<Member>> GetMember(int id)
         {
 
-            var member = Seeds.Members.Where(member => member.ID == id).First<Member>();
-            //var member = await _context.Members.FindAsync(id);
+            var member = await _memberService.GetAsync(id);
 
             if (member == null)
             {
                 return NotFound();
             }
 
-            return member;
+            return new ObjectResult(Task.FromResult(member));
         }
 
         //// PUT: api/Members/5

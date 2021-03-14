@@ -7,7 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
 using OpenLeague.Server.Data;
+using OpenLeague.Server.Services;
 
 namespace OpenLeague.Server
 {
@@ -24,13 +26,16 @@ namespace OpenLeague.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSwaggerGen();
-        //    services.AddDbContext<ApplicationDbContext>(options =>
-        //        options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
-        //    services.AddDatabaseDeveloperPageExceptionFilter();
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
+            services.AddDbContext<ApplicationDbContext>(opt =>
+                                               opt.UseInMemoryDatabase("OpenLeague"));
+            services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddTransient<IMemberService, MemberService>();
+            services.AddTransient<IScheduleItemService, ScheduleItemService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

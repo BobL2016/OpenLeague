@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OpenLeague.Server.Data;
 using OpenLeague.Shared.Models;
+using OpenLeague.Server.Services;
 
 namespace OpenLeague.Server.Controllers
 {
@@ -14,19 +15,18 @@ namespace OpenLeague.Server.Controllers
     [ApiController]
     public class ScheduleItemsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IScheduleItemService _scheduleItemService;
 
-        //public ScheduleItemsController(ApplicationDbContext context)
-        //{
-        //    _context = context;
-        //}
+        public ScheduleItemsController(IScheduleItemService scheduleItemService)
+        {
+            _scheduleItemService = scheduleItemService;
+        }
 
         // GET: api/ScheduleItems
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ScheduleItem>>> GetScheduleItems()
         {
-            return Seeds.ScheduleItems;
-            //return await _context.ScheduleItems.ToListAsync();
+            return new ObjectResult(await _scheduleItemService.GetAllAsync());
         }
 
         // GET: api/ScheduleItems/5
@@ -35,14 +35,14 @@ namespace OpenLeague.Server.Controllers
         {
             //var scheduleItem = await _context.ScheduleItems.FindAsync(id);
 
-            var scheduleItem = Seeds.ScheduleItems.Where(scheduleItem => scheduleItem.ID == id).First<ScheduleItem>();
+            var scheduleItem = await _scheduleItemService.GetAsync(id);
 
             if (scheduleItem == null)
             {
                 return NotFound();
             }
 
-            return scheduleItem;
+            return new ObjectResult(scheduleItem);
         }
 
         //// PUT: api/ScheduleItems/5
