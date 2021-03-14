@@ -15,10 +15,10 @@ namespace OpenLeague.Server.Data
             {
                 var members = new Member[]
                 {
-                    new Member { ID=1, FirstName = "John", LastName = "Doe", GHIN = "2148925", HandicapIndex = 2.5M },
-                    new Member { ID=2, FirstName = "Jane", LastName = "Doe", GHIN = "8624764", HandicapIndex = 21.9M },
-                    new Member { ID=3, FirstName = "John", LastName = "Smith", GHIN = "2148925", HandicapIndex = 16.2M },
-                    new Member { ID=4, FirstName = "Jane", LastName = "Smith", GHIN = "6515897", HandicapIndex = 1.4M },
+                    new Member { Id = 1, FirstName = "John", LastName = "Doe", GHIN = "2148925", HandicapIndex = 2.5M },
+                    new Member { Id = 2, FirstName = "Jane", LastName = "Doe", GHIN = "8624764", HandicapIndex = 21.9M },
+                    new Member { Id = 3, FirstName = "John", LastName = "Smith", GHIN = "2148925", HandicapIndex = 16.2M },
+                    new Member { Id = 4, FirstName = "Jane", LastName = "Smith", GHIN = "6515897", HandicapIndex = 1.4M },
                 };
 
                 return members;
@@ -31,10 +31,10 @@ namespace OpenLeague.Server.Data
             {
                 var scheduleItems = new ScheduleItem[]
                 {
-                    new ScheduleItem { ID = 1, Date = DateTime.Parse("4/4/2021 7:30 AM"), Title = "Opening Day", Format = "Two Man Best Ball" },
-                    new ScheduleItem { ID = 2, Date = DateTime.Parse("4/11/2021 7:45 AM"), Title = "League Play", Format = "Two Man Best Ball" },
-                    new ScheduleItem { ID = 3, Date = DateTime.Parse("4/18/2021 8:00 AM"), Title = "League Play", Format = "Two Man Best Ball" },
-                    new ScheduleItem { ID = 4, Date = DateTime.Parse("4/25/2021 8:15 AM"), Title = "Tourney", Format = "Four Man Scramble" }
+                    new ScheduleItem { Id = 1, Date = DateTime.Parse("4/4/2021 7:30 AM"), Title = "Opening Day", Format = "Two Man Best Ball" },
+                    new ScheduleItem { Id = 2, Date = DateTime.Parse("4/11/2021 7:45 AM"), Title = "League Play", Format = "Two Man Best Ball" },
+                    new ScheduleItem { Id = 3, Date = DateTime.Parse("4/18/2021 8:00 AM"), Title = "League Play", Format = "Two Man Best Ball" },
+                    new ScheduleItem { Id = 4, Date = DateTime.Parse("4/25/2021 8:15 AM"), Title = "Tourney", Format = "Four Man Scramble" }
                 };
 
                 return scheduleItems;

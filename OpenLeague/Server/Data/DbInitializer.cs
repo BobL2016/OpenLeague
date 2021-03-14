@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OpenLeague.Shared.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace OpenLeague.Server.Data
 {
     public class DbInitializer
     {
-        public static void Initialize(ApplicationDbContext context)
+        public static async void Initialize(ApplicationDbContext context)
         {
             context.Database.EnsureCreated();
 
@@ -18,10 +19,10 @@ namespace OpenLeague.Server.Data
             }
 
             context.Members.AddRange(Seeds.Members);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             context.ScheduleItems.AddRange(Seeds.ScheduleItems);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
     }

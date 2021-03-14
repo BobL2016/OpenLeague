@@ -18,7 +18,7 @@ namespace OpenLeague.Server.Services
 
         public async Task<Member> GetAsync(int id)
         {
-            return await Task.FromResult(Seeds.Members.Where(member => member.ID == id).FirstOrDefault());
+            return await Task.FromResult(Seeds.Members.Where(member => member.Id == id).FirstOrDefault());
         }
     }
 }
