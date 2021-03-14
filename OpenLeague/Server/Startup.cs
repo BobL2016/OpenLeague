@@ -28,11 +28,11 @@ namespace OpenLeague.Server
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSwaggerGen();
-            services.AddTransient<IMemberService, MemberServiceMock>();
-            services.AddTransient<IScheduleItemService, ScheduleServiceMock>();
-        //    services.AddDbContext<ApplicationDbContext>(options =>
-        //        options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
-        //    services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
+            services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddTransient<IMemberService, MemberService>();
+            services.AddTransient<IScheduleItemService, ScheduleItemService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
