@@ -106,7 +106,7 @@ namespace OpenLeague.Server.Controllers
         private bool MemberExists(int id)
         {
 
-            return Seeds.Members.Any(e => e.ID == id);
+            return Seeds.Members.Any(e => e.Id == id);
             //return _context.Members.Any(e => e.ID == id);
         }
     }

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace OpenLeague.Shared.Models
 {
-    public class ScheduleItem
+    public class ScheduleItem : BaseModel
     {
-        public int ID { get; set; }
         public DateTime Date { get; set; }
         public string Title { get; set; }
         public string Format { get; set; }

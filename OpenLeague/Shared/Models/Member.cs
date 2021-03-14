@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace OpenLeague.Shared.Models
 {
-    public class Member
+    public class Member : BaseModel
     {
-        public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string GHIN { get; set; }

@@ -106,7 +106,7 @@ namespace OpenLeague.Server.Controllers
         private bool ScheduleItemExists(int id)
         {
             //return _context.ScheduleItems.Any(e => e.ID == id);
-            return Seeds.ScheduleItems.Any(scheduleItem => scheduleItem.ID == id);
+            return Seeds.ScheduleItems.Any(scheduleItem => scheduleItem.Id == id);
         }
     }
 }

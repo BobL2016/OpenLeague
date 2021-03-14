@@ -11,7 +11,7 @@ namespace OpenLeague.Server.Services
     {
         public async Task<ScheduleItem> GetAsync(int id)
         {
-            return await Task.FromResult(Seeds.ScheduleItems.Where(scheduleItem => scheduleItem.ID == id).FirstOrDefault());
+            return await Task.FromResult(Seeds.ScheduleItems.Where(scheduleItem => scheduleItem.Id == id).FirstOrDefault());
         }
 
         public async Task<IEnumerable<ScheduleItem>> GetAllAsync()
