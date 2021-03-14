@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
 using OpenLeague.Server.Data;
 using OpenLeague.Server.Services;
 
@@ -28,8 +29,10 @@ namespace OpenLeague.Server
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSwaggerGen();
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
+            services.AddDbContext<ApplicationDbContext>(opt =>
+                                               opt.UseInMemoryDatabase("OpenLeague"));
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddTransient<IMemberService, MemberService>();
             services.AddTransient<IScheduleItemService, ScheduleItemService>();
