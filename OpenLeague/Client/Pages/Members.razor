@@ -53,6 +53,8 @@ else
     protected override async Task OnInitializedAsync()
     {
         members = await Http.GetFromJsonAsync<Member[]>("api/Members");
+
+        SortTable("Id");
     }
 
     private void SortTable(string columnName)

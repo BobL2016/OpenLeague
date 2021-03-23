@@ -47,6 +47,7 @@ else
                     orderby item.Date
                     select item;
         scheduleItems = query.ToArray<ScheduleItem>();
+        SortTable("Date");
 
     }
 
