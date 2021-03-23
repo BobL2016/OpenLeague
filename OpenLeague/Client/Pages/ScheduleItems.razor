@@ -11,7 +11,9 @@ else
     <table class="table">
         <thead>
             <tr>
-                <td>Date</td>
+                <td>
+                    <span class="sort-link" @onclick="@(() => SortTable("Date"))">Date</span>
+                </td>
                 <td>Title</td>
                 <td>Format</td>
             </tr>
@@ -32,16 +34,62 @@ else
 @inject HttpClient Http;
 
 @code {
-    ScheduleItem[] scheduleItems;
+
+    IList<ScheduleItem> scheduleItems;
+
+    private string CurrentSortColumn;
+    private bool IsSortedAscending;
 
     protected override async Task OnInitializedAsync()
     {
         scheduleItems = await Http.GetFromJsonAsync<ScheduleItem[]>("api/ScheduleItems");
         var query = from item in scheduleItems
-                     orderby item.Date
-                     select item;
+                    orderby item.Date
+                    select item;
         scheduleItems = query.ToArray<ScheduleItem>();
-        
+
+    }
+
+    private void SortTable(string columnName)
+    {
+        if (columnName != CurrentSortColumn)
+        {
+            scheduleItems = scheduleItems.OrderBy(x =>
+                                   x.GetType()
+                                   .GetProperty(columnName)
+                                   .GetValue(x, null))
+                         .ToList();
+            CurrentSortColumn = columnName;
+            IsSortedAscending = true;
+        }
+        else
+        {
+            if (IsSortedAscending)
+            {
+                scheduleItems = scheduleItems.OrderByDescending(x =>
+                x.GetType()
+                .GetProperty(columnName)
+                .GetValue(x, null))
+                .ToList();
+            }
+            else
+            {
+                scheduleItems = scheduleItems.OrderBy(x =>
+                x.GetType()
+                .GetProperty(columnName)
+                .GetValue(x, null))
+                .ToList();
+            }
+            IsSortedAscending = !IsSortedAscending;
+        }
     }
 }
 
+<style>
+
+    .sort-link {
+        cursor: pointer;
+        color: blue;
+        text-decoration: underline;
+    }
+</style>
