@@ -28,7 +28,9 @@ namespace OpenLeague.Server.Data
                         entry.Property("Created").CurrentValue = DateTimeOffset.Now;
                     }
                     else if (entry.State == EntityState.Modified)
-                        entry.Property("LastUpdated").CurrentValue = DateTimeOffset.Now;
+                    {
+                        entry.Property("Updated").CurrentValue = DateTimeOffset.Now;
+                    }
                 }
             }
 
