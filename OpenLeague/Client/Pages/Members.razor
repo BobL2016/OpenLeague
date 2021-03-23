@@ -12,11 +12,21 @@ else
     <table class="table">
         <thead>
             <tr>
-                <td>Id</td>
-                <td>First Name</td>
-                <td>Last Name</td>
-                <td>GHIN</td>
-                <td>Handicap Index</td>
+                <td>
+                    <span class="sort-link" @onclick="@(() => SortTable("Id"))">Id</span>
+                </td>
+                <td>
+                    <span class="sort-link" @onclick="@(() => SortTable("FirstName"))">Last Name</span>
+                </td>
+                <td>
+                    <span class="sort-link" @onclick="@(() => SortTable("LastName"))">Last Name</span>
+                </td>
+                <td>
+                    <span class="sort-link" @onclick="@(() => SortTable("GHIN"))">GHIN</span>
+                </td>
+                <td>
+                    <span class="sort-link" @onclick="@(() => SortTable("HandicapIndex"))">Handicap Index</span>
+                </td>
             </tr>
         </thead>
         <tbody>
@@ -36,10 +46,56 @@ else
 
 @code {
 
-    private Member[] members;
+    private IList<Member> members;
+    private string CurrentSortColumn;
+    private bool IsSortedAscending;
 
     protected override async Task OnInitializedAsync()
     {
         members = await Http.GetFromJsonAsync<Member[]>("api/Members");
     }
+
+    private void SortTable(string columnName)
+    {
+        if(columnName != CurrentSortColumn)
+        {
+            members = members.OrderBy(x =>
+                                       x.GetType()
+                                       .GetProperty(columnName)
+                                       .GetValue(x, null))
+                             .ToList();
+            CurrentSortColumn = columnName;
+            IsSortedAscending = true;
+        }
+        else
+        {
+            if (IsSortedAscending)
+            {
+                members = members.OrderByDescending(x =>
+                    x.GetType()
+                    .GetProperty(columnName)
+                    .GetValue(x, null))
+                    .ToList();
+            }
+            else
+            {
+                members = members.OrderBy(x =>
+                    x.GetType()
+                    .GetProperty(columnName)
+                    .GetValue(x, null))
+                    .ToList();
+            }
+            IsSortedAscending = !IsSortedAscending;
+        }
+    }
 }
+
+<style>
+
+    .sort-link {
+        cursor: pointer;
+        color: blue;
+        text-decoration: underline;
+    }
+
+</style>
