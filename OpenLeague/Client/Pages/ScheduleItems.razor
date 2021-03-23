@@ -1,10 +1,10 @@
 ﻿@page "/scheduleitems"
 
-<h1>Schedule</h1>
+<h1>2021 Schedule</h1>
 
 @if (scheduleItems == null)
 {
-    <p>Loading...</p>
+    <p><em>Loading...</em></p>
 }
 else
 {
@@ -37,6 +37,11 @@ else
     protected override async Task OnInitializedAsync()
     {
         scheduleItems = await Http.GetFromJsonAsync<ScheduleItem[]>("api/ScheduleItems");
+        var query = from item in scheduleItems
+                     orderby item.Date
+                     select item;
+        scheduleItems = query.ToArray<ScheduleItem>();
+        
     }
 }
 
