@@ -38,7 +38,7 @@ namespace OpenLeague.Server
 
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("DefaultConnection")));
+            //        Configuration.GetConnectionString("SQLServerConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddTransient<IMemberService, MemberService>();
