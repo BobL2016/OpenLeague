@@ -9,7 +9,7 @@ namespace OpenLeague.Server.Data
 {
     public class DbInitializer
     {
-        public static async void Initialize(ApplicationDbContext context)
+        public static void Initialize(ApplicationDbContext context)
         {
             context.Database.EnsureCreated();
 
@@ -18,11 +18,11 @@ namespace OpenLeague.Server.Data
                 return;
             }
 
-            context.Members.AddRange(Seeds.Members);
-            await context.SaveChangesAsync();
+            context.Members.AddRange(Seeds.Members.Select(member => new Member { FirstName = member.FirstName, LastName = member.LastName, GHIN = member.GHIN, HandicapIndex = member.HandicapIndex }).ToArray());
+            context.SaveChanges();
 
-            context.ScheduleItems.AddRange(Seeds.ScheduleItems);
-            await context.SaveChangesAsync();
+            context.ScheduleItems.AddRange(Seeds.ScheduleItems.Select(scheduleItem => new ScheduleItem { Date = scheduleItem.Date, Title = scheduleItem.Title, Format = scheduleItem.Format }).ToArray());
+            context.SaveChanges();
         }
 
     }
