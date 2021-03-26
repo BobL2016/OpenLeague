@@ -29,10 +29,17 @@ namespace OpenLeague.Server
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSwaggerGen();
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
+
+            //services.AddDbContext<ApplicationDbContext>(opt =>
+            //                                   opt.UseInMemoryDatabase("OpenLeague"));
+
             //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
-            services.AddDbContext<ApplicationDbContext>(opt =>
-                                               opt.UseInMemoryDatabase("OpenLeague"));
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddTransient<IMemberService, MemberService>();
             services.AddTransient<IScheduleItemService, ScheduleItemService>();

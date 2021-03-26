@@ -14,13 +14,19 @@ namespace OpenLeague.Server.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.3");
+                .HasAnnotation("ProductVersion", "5.0.4");
 
             modelBuilder.Entity("OpenLeague.Shared.Models.Member", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset?>("Deleted")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("TEXT");
@@ -29,23 +35,32 @@ namespace OpenLeague.Server.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("HandicapIndex")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(4,1)");
 
                     b.Property<string>("LastName")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("ID");
+                    b.Property<DateTimeOffset?>("Updated")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Members");
                 });
 
             modelBuilder.Entity("OpenLeague.Shared.Models.ScheduleItem", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset?>("Deleted")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Format")
@@ -54,7 +69,10 @@ namespace OpenLeague.Server.Data.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("ID");
+                    b.Property<DateTimeOffset?>("Updated")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
 
                     b.ToTable("ScheduleItems");
                 });
