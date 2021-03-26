@@ -30,11 +30,11 @@ namespace OpenLeague.Server
             services.AddRazorPages();
             services.AddSwaggerGen();
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
 
-            //services.AddDbContext<ApplicationDbContext>(opt =>
-            //                                   opt.UseInMemoryDatabase("OpenLeague"));
+            services.AddDbContext<ApplicationDbContext>(opt =>
+                                               opt.UseInMemoryDatabase("OpenLeague"));
 
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseSqlServer(
