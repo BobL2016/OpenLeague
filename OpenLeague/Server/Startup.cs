@@ -9,7 +9,9 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using OpenLeague.Server.Data;
+using OpenLeague.Server.Models;
 using OpenLeague.Server.Services;
+using Microsoft.AspNetCore.Authentication;
 
 namespace OpenLeague.Server
 {
@@ -26,10 +28,6 @@ namespace OpenLeague.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-            services.AddRazorPages();
-            services.AddSwaggerGen();
-
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
 
@@ -39,6 +37,17 @@ namespace OpenLeague.Server
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("SQLServerConnection")));
+
+            services.AddDefaultIdentity<ApplicationUser>(options =>
+                options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddIdentityServer().AddApiAuthorization<ApplicationUser, ApplicationDbContext>(); ;
+
+            services.AddAuthentication().AddIdentityServerJwt();
+
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+            services.AddSwaggerGen();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddTransient<IMemberService, MemberService>();
@@ -71,6 +80,10 @@ namespace OpenLeague.Server
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseIdentityServer();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

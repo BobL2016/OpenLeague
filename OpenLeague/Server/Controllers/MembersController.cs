@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using OpenLeague.Server.Data;
 using OpenLeague.Shared.Models;
 using OpenLeague.Server.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OpenLeague.Server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MembersController : ControllerBase

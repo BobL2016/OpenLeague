@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>Authtest.Server-3064D884-DE3C-4C92-BF30-BCDB7DADE839</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
