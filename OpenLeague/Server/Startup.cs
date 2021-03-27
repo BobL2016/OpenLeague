@@ -33,12 +33,12 @@ namespace OpenLeague.Server
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
 
-            services.AddDbContext<ApplicationDbContext>(opt =>
-                                               opt.UseInMemoryDatabase("OpenLeague"));
+            //services.AddDbContext<ApplicationDbContext>(opt =>
+            //                                   opt.UseInMemoryDatabase("OpenLeague"));
 
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("SQLServerConnection")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("SQLServerConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddTransient<IMemberService, MemberService>();
