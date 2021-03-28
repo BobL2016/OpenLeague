@@ -12,6 +12,7 @@ using OpenLeague.Server.Data;
 using OpenLeague.Server.Models;
 using OpenLeague.Server.Services;
 using Microsoft.AspNetCore.Authentication;
+using IdentityServer4;
 
 namespace OpenLeague.Server
 {
@@ -43,7 +44,14 @@ namespace OpenLeague.Server
 
             services.AddIdentityServer().AddApiAuthorization<ApplicationUser, ApplicationDbContext>(); ;
 
-            services.AddAuthentication().AddIdentityServerJwt();
+            services.AddAuthentication().AddIdentityServerJwt()
+                .AddGoogle("Google", options =>
+                {
+                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+
+                    options.ClientId = "928895582436-1b7d7o80464v5rs0tmbhvtlnvglc47mq.apps.googleusercontent.com";
+                    options.ClientSecret = "0wmh1U1CTGrCi2ARlygYZWca";
+                });
 
             services.AddControllersWithViews();
             services.AddRazorPages();
