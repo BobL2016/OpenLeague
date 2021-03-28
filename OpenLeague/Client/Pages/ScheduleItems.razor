@@ -22,7 +22,7 @@ else
             @foreach (var scheduleItem in scheduleItems)
             {
                 <tr>
-                    <td>@scheduleItem.Date</td>
+                    <td>@scheduleItem.Date.ToString("MMMM d")</td>
                     <td>@scheduleItem.Title</td>
                     <td>@scheduleItem.Format</td>
                 </tr>
