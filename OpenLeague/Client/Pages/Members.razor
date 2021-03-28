@@ -1,6 +1,6 @@
 ﻿@page "/members"
 @using OpenLeague.Shared
-@attribute [Authorize]
+@attribute [Authorize(Roles = "CanViewMembersPage")]
 @inject HttpClient Http
 
 <h1>Members</h1>

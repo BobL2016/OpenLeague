@@ -13,6 +13,7 @@ using OpenLeague.Server.Models;
 using OpenLeague.Server.Services;
 using Microsoft.AspNetCore.Authentication;
 using IdentityServer4;
+using Microsoft.AspNetCore.Identity;
 
 namespace OpenLeague.Server
 {
@@ -40,9 +41,18 @@ namespace OpenLeague.Server
                     Configuration.GetConnectionString("SQLServerConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>(options =>
-                options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+                options.SignIn.RequireConfirmedAccount = true)
+                    .AddRoles<IdentityRole>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddIdentityServer().AddApiAuthorization<ApplicationUser, ApplicationDbContext>(); ;
+            services.AddIdentityServer()
+                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
+                {
+                    options.IdentityResources["openid"].UserClaims.Add("name");
+                    options.ApiResources.Single().UserClaims.Add("name");
+                    options.IdentityResources["openid"].UserClaims.Add("role");
+                    options.ApiResources.Single().UserClaims.Add("role");
+                });
 
             services.AddAuthentication().AddIdentityServerJwt()
                 .AddGoogle("Google", options =>
