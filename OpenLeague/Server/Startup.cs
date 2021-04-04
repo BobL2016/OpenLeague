@@ -55,12 +55,13 @@ namespace OpenLeague.Server
                 });
 
             services.AddAuthentication().AddIdentityServerJwt()
-                .AddGoogle("Google", options =>
+                .AddGoogle(options =>
                 {
-                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                    IConfigurationSection googleAuthNSection =
+                        Configuration.GetSection("Authentication:Google");
 
-                    options.ClientId = "928895582436-1b7d7o80464v5rs0tmbhvtlnvglc47mq.apps.googleusercontent.com";
-                    options.ClientSecret = "0wmh1U1CTGrCi2ARlygYZWca";
+                    options.ClientId = googleAuthNSection["ClientId"];
+                    options.ClientSecret = googleAuthNSection["ClientSecret"];
                 });
 
             services.AddControllersWithViews();
