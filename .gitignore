@@ -339,3 +339,6 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /OpenLeague/Client/wwwroot/app_data
+
+# Sqlite dbs
+*.sqlite
