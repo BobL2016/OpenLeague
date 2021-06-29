@@ -1,4 +1,6 @@
 ﻿@page "/members"
+@using OpenLeague.Shared
+@attribute [Authorize(Roles = "CanViewMembersPage")]
 @inject HttpClient Http
 
 <h1>Members</h1>
@@ -32,13 +34,13 @@ else
         <tbody>
             @foreach (Member member in members)
             {
-            <tr>
-                <td>@member.Id</td>
-                <td>@member.FirstName</td>
-                <td>@member.LastName</td>
-                <td>@member.GHIN</td>
-                <td>@member.HandicapIndex</td>
-            </tr>
+                <tr>
+                    <td>@member.Id</td>
+                    <td>@member.FirstName</td>
+                    <td>@member.LastName</td>
+                    <td>@member.GHIN</td>
+                    <td>@member.HandicapIndex</td>
+                </tr>
             }
         </tbody>
     </table>
@@ -59,7 +61,7 @@ else
 
     private void SortTable(string columnName)
     {
-        if(columnName != CurrentSortColumn)
+        if (columnName != CurrentSortColumn)
         {
             members = members.OrderBy(x =>
                                        x.GetType()
@@ -99,5 +101,4 @@ else
         color: blue;
         text-decoration: underline;
     }
-
 </style>
